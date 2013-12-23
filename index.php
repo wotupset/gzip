@@ -7,7 +7,7 @@ $text=celltext;
 //$time = time();//UNIX時間時區設定
 $text=$celltext;
 function reg($phpself,$logfile,$text){
-	$text=trim($text);
+	//$text=trim($text);
 	$time=$GLOBALS['time'];
 	$name=substr(crypt(md5($_SERVER["REMOTE_ADDR"].'ㄎㄎ'.gmdate("ymd", $time)),'id'),-8);
 	$text = preg_replace("/http\:\/\//", "Ettpp//", $text);//
