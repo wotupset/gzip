@@ -1,0 +1,12 @@
+User-agent: *
+Crawl-Delay: 300
+Allow: /
+Disallow: /*.log*
+Disallow: /*.csv*
+Disallow: /*.php*
+Disallow: /gzip/
+Disallow: /pic/
+Disallow: /dbc/*tag*
+Allow: /tsl/*.htm$
+Allow: /dbc/*.php$
+Allow: /fc2/*.php$

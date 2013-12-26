@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Robots" contect="noindex,follow">
+<script type="text/javascript">
+	function loadXMLDoc(){
+		var xmlhttp;
+		if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}else{// code for IE6, IE5 //給舊版IE
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		//onreadystatechange=每当 readyState 属性改变时，就会调用该函数
+		xmlhttp.onreadystatechange=function(){
+			//readyState=4：请求已完成，且响应已就绪//存有 XMLHttpRequest 的状态
+			//status=200："OK"
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){ //就绪状态
+				//回傳的資料
+				document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+			}
+		}
+		//使用GET方法拿資料
+		//true=異步取得伺服器上文件的內容
+		xmlhttp.open("GET","./test1.txt",true);
+		xmlhttp.send();//送出請求
+	}
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="loadXMLDoc()">通过 AJAX 改变内容</button>
+
+</body>
+</html>

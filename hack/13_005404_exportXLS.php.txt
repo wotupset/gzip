@@ -1,0 +1,43 @@
+<?php
+/*******EDIT LINES 3-8*******/
+$DB_Server = "mysql.liqu.in"; //MySQL Server
+$DB_Username = "u504889131_aaaa"; //MySQL Username
+$DB_Password = "aaaaaa"; //MySQL Password
+$DB_DBName = "u504889131_aaaa"; //MySQL Database Name
+$DB_TBLName = "index"; //MySQL Table Name
+$filename = "123"; //File Name
+/*******YOU DO NOT NEED TO EDIT ANYTHING BELOW THIS LINE*******/
+//create MySQL connection
+$sql = "Select * from $DB_TBLName";
+$con = mysql_connect($DB_Server, $DB_Username, $DB_Password) or die("".mysql_error()."<br>".mysql_errno());
+$db = mysql_select_db($DB_DBName, $con) or die("".mysql_error()."<br>".mysql_errno());
+$result = mysql_query($sql,$con) or die("".mysql_error()."<br>".mysql_errno());
+$file_ending = "xls";
+Header("Content-type: application/xls");
+Header("Content-Disposition: attachment; filename=$filename.$file_ending");
+$sep = "\t"; //tabbed character
+for ($i = 0; $i < mysql_num_fields($result); $i++) {
+echo mysql_field_name($result,$i) . "\t";
+}
+print("\n");
+//end of printing column names
+ 
+//start while loop to get data
+while($row = mysql_fetch_row($result)) {
+$schema_insert = "";
+for($j=0; $j<mysql_num_fields($result);$j++)
+{
+if(!isset($row[$j]))
+$schema_insert .= "NULL".$sep;
+elseif ($row[$j] != "")
+$schema_insert .= "$row[$j]".$sep;
+else
+$schema_insert .= "".$sep;
+}
+$schema_insert = str_replace($sep."$", "", $schema_insert);
+$schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
+$schema_insert .= "\t";
+print(trim($schema_insert));
+print "\n";
+}
+?>
